@@ -1,0 +1,105 @@
+// 背景图片
+bg-image($url)
+  background-image url($url + '@2x.png')
+  @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3)
+    background-image url($url + '@3x.png')
+// 锁定图片尺寸
+fix-image-size()
+  max-width 100%
+  max-height 100%
+// 多行溢出
+mult_line_ellipsis($line = 2)
+  overflow hidden
+  text-overflow ellipsis
+  display -webkit-box
+  -webkit-line-clamp $line
+  -webkit-box-orient vertical
+prefix-icon($width = 0, $height = 0)
+  content ' '
+  position absolute
+  left 0
+  top 50%
+  height $height
+  width $width
+  transform translateY(-50%)
+  background-repeat no-repeat
+  background-size contain
+// 不换行
+no-wrap()
+  text-overflow ellipsis
+  overflow hidden
+  white-space nowrap
+// 清除按钮默认样式
+btn-normal()
+  display inline-block
+  font-size inherit
+  color inherit
+  background transparent
+  box-shadow none
+  border-radius 0
+  border none
+  padding 0
+  &::after
+    display none
+// 扩展点击区域
+extend-click()
+  position relative
+  &::before
+    content ''
+    position absolute
+    top -10px
+    left -10px
+    right -10px
+    bottom -10px
+clearfix()
+  &:before, &:after
+    content ''
+    display table
+  &:after
+    clear both
+    overflow hidden
+.triangleBase
+  _font-size 0
+  _line-height 0
+  _overflow hidden
+  width 0
+  height 0
+// Example: @include regulaTriangle(top,red)
+regulaTriangle($derection = bottom, $color = #000, $width = 20rpx)
+  @extend .triangleBase
+  border-width $width
+  // 向右
+  if ($derection == right)
+    border-style dashed dashed dashed solid
+    border-color transparent transparent transparent $color
+  // 向左
+  if ($derection == left)
+    border-style dashed solid dashed dashed
+    border-color transparent $color transparent transparent
+  // 向上
+  if ($derection == top)
+    border-style dashed dashed solid dashed
+    border-color transparent transparent $color transparent
+  // 向下
+  if ($derection == bottom)
+    border-style solid dashed dashed dashed
+    border-color $color transparent transparent transparent
+right-angledTriangle($derection = 1, $color = #000, $width = 20rpx, $opacity = transparent, $border = dashed)
+  @extend .triangleBase
+  border-width $width
+  // 向右
+  if ($derection == 1)
+    border-style $border dashed dashed $border
+    border-color $color $opacity $opacity $color
+  // 向右
+  if ($derection == 2)
+    border-style $border $border dashed dashed
+    border-color $color $color $opacity $opacity
+  // 向右
+  if ($derection == 3)
+    border-style dashed $border $border dashed
+    border-color $opacity $color $color $opacity
+  // 向右
+  if ($derection == 4)
+    border-style dashed dashed $border $border
+    border-color $opacity $opacity $color $color
